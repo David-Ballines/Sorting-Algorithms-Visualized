@@ -8,15 +8,12 @@ window = pygame.display.set_mode((width, height))
 fnt1 = pygame.font.SysFont("comicsans", 30, bold=False, italic=False)
 run = True
 
-alg = "Pick an algorithm"
+alg = "Pick an Algorithm"
 
 numbers = [0]*150
 colors = [0]*150
 colorPick = [(0,204,102), (255,0,0)]
 size = 150
-
-#might not need gap
-gap = 4
 
 class button():
     def __init__(self, color, x, y, width, height, text =""):
@@ -43,23 +40,19 @@ class button():
                 return True
         
         return False
-#might want to make this function to make it more efficient
-def swap():
-    pass 
 
 #makes a new array 
 def generate():
     for i in range(size):
-        colors[i] = (0, 204, 102)
+        colors[i] = colorPick[0]
         numbers[i] = random.randrange(1,150)
 
 #makes screen white then draws the lines again when calling draw
-#do not need any of this
 def refill():
     window.fill((255,255,255))
     draw()
     pygame.display.update()
-    pygame.time.delay(50)
+    pygame.time.delay(25)
 
 def bubbleSort(nums):
     for i in range(size):
@@ -71,11 +64,6 @@ def bubbleSort(nums):
                 nums[j], nums[j+1] = nums[j+1], nums[j]
             colors[j] = colorPick[0]
         colors[len(colors)-1-i] = colorPick[0]
-
-
-def mergeDraw():
-    pass
-
 
 def mergeSort(l, r):
     mid = (l+r)//2
@@ -90,11 +78,11 @@ def merge(x1, y1, x2, y2):
     temp = []
     pygame.event.pump()
     while i <= y1 and j <= y2:
-        colors[i] = (255,0,0)
-        colors[j] = (255,0,0)
+        colors[i] = colorPick[1]
+        colors[j] = colorPick[1]
         refill()
-        colors[i] = (0,204,102)
-        colors[j] = (0,204,102)
+        colors[i] = colorPick[0]
+        colors[j] = colorPick[0]
         if(numbers[i] < numbers[j]):
             temp.append(numbers[i])
             i += 1
@@ -102,15 +90,15 @@ def merge(x1, y1, x2, y2):
             temp.append(numbers[j])
             j += 1
     while i <= y1:
-        colors[i] = (225,0,0)
+        colors[i] = colorPick[1]
         refill()
-        colors[i] = (0,204,102)
+        colors[i] = colorPick[0]
         temp.append(numbers[i])
         i +=1
     while j <= y2:
-        colors[j] = (255,0,0)
+        colors[j] = colorPick[1]
         refill()
-        colors[j] = (0,204,102)
+        colors[j] = colorPick[0]
         temp.append(numbers[j])
         j += 1
     j = 0
@@ -119,20 +107,18 @@ def merge(x1, y1, x2, y2):
         numbers[i] = temp[j]
         j+=1
         refill()
-        #if (y2 - x1 == len(numbers)-2):
 
 
 def partition(l, r):
     i = l-1
     pivot = numbers[r]
-    colors[r] = (255,0,0)
+    colors[r] = colorPick[1]
     refill()
     for j in range(l,r):
         if(numbers[j] < pivot):
             i +=1
             refill()
             numbers[i], numbers[j] = numbers[j],numbers[i]
-    refill()
     numbers[i+1], numbers[r] = numbers[r],numbers[i+1]
     refill() 
     return(i+1)
@@ -150,7 +136,6 @@ def draw():
     window.blit(txt1,(600,60))
     lineWidth = (width -150)//size
     boundaryArr = 900/size
-    boundaryGrp = 550/100
 
     mergeButton.draw(window)
     bubbleButton.draw(window)
@@ -189,17 +174,17 @@ while run:
                 quickSort(1, len(numbers)-1)
         if event.type == pygame.MOUSEBUTTONDOWN:
             if(mergeButton.isOver(position)):
-                alg = "algorithm used: Merge Sort"
+                alg = "Algorithm Used: Merge Sort"
                 mergeSort(0,len(numbers)-1)
             if(quickButton.isOver(position)):
-                alg = "algorithm used: Quick Sort"
+                alg = "Algorithm Used: Quick Sort"
                 quickSort(0, len(numbers)-1)
             if(bubbleButton.isOver(position)):
-                alg = "algorithm used: Bubble Sort"
+                alg = "Algorithm Used: Bubble Sort"
                 bubbleSort(numbers)
             if(generateButton.isOver(position)):
                 generate()
-                alg = "Pick an algorithm"
+                alg = "Pick an Algorithm"
     draw()
     pygame.display.update()
 
