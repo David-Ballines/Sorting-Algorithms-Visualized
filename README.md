@@ -1,12 +1,12 @@
 # Sorting-Algorithms-Visualized
-This is a GUI which helps visualize three different sorting algorithms.
+This is a GUI that helps visualize three different sorting algorithms.
 
 # Getting Started
 To start to play you can open the file through a Python IDE, you can also run the program through the console using the following command line inside the folder.
 ```bash
 python Sorting_visualized.py
 ```
-Once program has started you can start a sorting algorithm by clicking one of the three algorithms. There is a button, make new array, that will create a new array with different values.
+Once the program has started you can start a sorting algorithm by clicking one of the three algorithms. There is a button, make a new array, that will create a new array with different values.
 
 ### Prerequisites
 
